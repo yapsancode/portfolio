@@ -1,0 +1,23 @@
+<!-- templates/partials/sidebar.html -->
+{{define "sidebar"}}
+<div class="w-1/4 bg-gray-800 text-white p-4">
+    <ul class="space-y-4">
+        <h3 class="text-lg font-bold">Welcome to Isyraf's Portfolio</h3>
+        <div class="flex items-center gap-4">
+            <button id="playAudio" class="bg-blue-500 text-white px-3 py-1 rounded">
+                ▶️ Play Welcome Audio
+            </button>
+            <audio id="welcomeAudio" src="static/audio/welcome.mp3"></audio>
+        </div>
+        <li>
+            <button 
+                hx-get="/sections/experience" 
+                hx-target="#mainContent" 
+                class="w-full text-left">
+                Working Experience
+            </button>
+        </li>
+        <!-- Add other navigation items -->
+    </ul>
+</div>
+{{end}}

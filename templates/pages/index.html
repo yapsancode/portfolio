@@ -1,0 +1,38 @@
+<!-- templates/pages/index.html -->
+{{define "content"}}
+<div>
+    <h1 class="text-2xl font-bold">Welcome to My Portfolio!</h1>
+    
+    <!-- Working Experience -->
+    <section>
+        <h2 class="text-2xl font-bold mb-4">Working Experience</h2>
+        <div class="space-y-4">
+            <div class="bg-white p-4 rounded shadow">
+                <h3 class="font-semibold">Software Developer at ABC Co.</h3>
+                <p>Developed scalable web applications and collaborated with cross-functional teams.</p>
+            </div>
+            <div class="bg-white p-4 rounded shadow">
+                <h3 class="font-semibold">Intern at XYZ Inc.</h3>
+                <p>Worked on IoT projects and implemented innovative solutions for client needs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- List of Projects -->
+    <section>
+        <h2 class="text-2xl font-bold mb-4">List of Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white p-4 rounded shadow">
+                <h3 class="font-semibold">Project 1</h3>
+                <p>A web app for task management with real-time collaboration.</p>
+            </div>
+            <div class="bg-white p-4 rounded shadow">
+                <h3 class="font-semibold">Project 2</h3>
+                <p>An IoT-based system for smart home automation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Other sections... -->
+</div>
+{{end}}
