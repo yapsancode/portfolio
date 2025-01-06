@@ -1,8 +1,9 @@
+// internal/database/mysql.go
 package database
 
 import (
 	"database/sql"
-	"log"
+	"portfolio/internal/config"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -10,8 +11,10 @@ import (
 var DB *sql.DB
 
 func Initialize() error {
+	dbConfig := config.GetDBConfig()
+
 	var err error
-	DB, err = sql.Open("mysql", "root:key-1WIFI@tcp(127.0.0.1:3306)/portfolio_db")
+	DB, err = sql.Open("mysql", dbConfig.FormatDSN())
 	if err != nil {
 		return err
 	}
@@ -19,7 +22,6 @@ func Initialize() error {
 	if err = DB.Ping(); err != nil {
 		return err
 	}
-	log.Println("Database connected successfully!")
 
 	return createTables()
 }
