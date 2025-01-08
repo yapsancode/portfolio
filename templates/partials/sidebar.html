@@ -2,7 +2,17 @@
 {{define "sidebar"}}
 <div class="w-1/4 bg-gray-800 text-white p-4">
     <ul class="space-y-4">
-        <h3 class="text-lg font-bold">Welcome to Isyraf's Portfolio</h3>
+        <!-- Make title clickable -->
+        <h3 class="text-lg font-bold hover:text-blue-300 cursor-pointer" hx-get="/" hx-target="#mainContent">
+            Welcome to Isyraf's Portfolio
+        </h3>
+
+        <!-- Or add explicit Home button -->
+        <li>
+            <button hx-get="/" hx-target="#mainContent" class="w-full text-left text-blue-300 hover:text-blue-400">
+                🏠 Home
+            </button>
+        </li>
         <div class="flex items-center gap-4">
             <button id="playAudio" class="bg-blue-500 text-white px-3 py-1 rounded">
                 ▶️ Play Welcome Audio
@@ -10,14 +20,30 @@
             <audio id="welcomeAudio" src="static/audio/welcome.mp3"></audio>
         </div>
         <li>
-            <button 
-                hx-get="/sections/experience" 
-                hx-target="#mainContent" 
-                class="w-full text-left">
+            <button hx-get="/experience" hx-target="#mainContent" class="w-full text-left">
                 Working Experience
             </button>
         </li>
-        <!-- Add other navigation items -->
+        <li>
+            <button hx-get="/projects" hx-target="#mainContent" class="w-full text-left">
+                Projects
+            </button>
+        </li>
+        <li>
+            <button hx-get="/contact" hx-target="#mainContent" class="w-full text-left">
+                Contact Me
+            </button>
+        </li>
+        <li>
+            <button hx-get="/ama" hx-target="#mainContent" class="w-full text-left">
+                Ask Me Anything
+            </button>
+        </li>
+        <li>
+            <button hx-get="/quiz" hx-target="#mainContent" class="w-full text-left">
+                Programming Quiz
+            </button>
+        </li>
     </ul>
 </div>
 {{end}}

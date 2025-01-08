@@ -1,38 +1,19 @@
-<!-- templates/pages/index.html -->
 {{define "content"}}
-<div>
-    <h1 class="text-2xl font-bold">Welcome to My Portfolio!</h1>
+<div class="flex flex-col items-center justify-center h-full text-center">
+    <h1 class="text-4xl font-bold mb-6">Welcome to My Portfolio</h1>
+    <p class="text-xl mb-8">Hi, I'm Isyraf - a Software Developer</p>
+    <div class="space-y-4 max-w-2xl">
+        <p class="text-gray-600">I specialize in building web applications using modern technologies.</p>
+        <p class="text-gray-600">Please use the sidebar navigation to explore my work experience, projects, and more!</p>
+    </div>
     
-    <!-- Working Experience -->
-    <section>
-        <h2 class="text-2xl font-bold mb-4">Working Experience</h2>
-        <div class="space-y-4">
-            <div class="bg-white p-4 rounded shadow">
-                <h3 class="font-semibold">Software Developer at ABC Co.</h3>
-                <p>Developed scalable web applications and collaborated with cross-functional teams.</p>
-            </div>
-            <div class="bg-white p-4 rounded shadow">
-                <h3 class="font-semibold">Intern at XYZ Inc.</h3>
-                <p>Worked on IoT projects and implemented innovative solutions for client needs.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- List of Projects -->
-    <section>
-        <h2 class="text-2xl font-bold mb-4">List of Projects</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-white p-4 rounded shadow">
-                <h3 class="font-semibold">Project 1</h3>
-                <p>A web app for task management with real-time collaboration.</p>
-            </div>
-            <div class="bg-white p-4 rounded shadow">
-                <h3 class="font-semibold">Project 2</h3>
-                <p>An IoT-based system for smart home automation.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Other sections... -->
+    <!-- Optional: Add a profile image or animation here -->
+    
+    <div class="mt-8">
+        <button hx-get="/working-on" hx-target="#currentWork" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+            What I'm Working On
+        </button>
+        <div id="currentWork" class="mt-4 text-gray-600"></div>
+    </div>
 </div>
 {{end}}
