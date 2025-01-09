@@ -9,14 +9,18 @@
     <script src="https://cdn.jsdelivr.net/npm/htmx.org"></script>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans">
-    <div class="flex h-screen">
-        {{template "sidebar" .}}
-        <div class="w-3/4 p-4">
-            <div id="mainContent">
-                {{template "content" .}}
-            </div>
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <div class="w-16">
+            {{template "sidebar" .}}
+        </div>
+
+        <!-- Main Content -->
+        <div id="mainContent" class="flex-grow p-4">
+            {{template "content" .}}
         </div>
     </div>
     <script src="/static/js/main.js"></script>

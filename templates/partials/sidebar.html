@@ -1,47 +1,107 @@
 <!-- templates/partials/sidebar.html -->
 {{define "sidebar"}}
-<div class="w-1/4 bg-gray-800 text-white p-4">
+<div class="fixed top-0 left-0 h-screen w-16 m-0 flex flex-col bg-gray-900 text-white p-4 shadow-lg">
     <ul class="space-y-4">
-        <!-- Make title clickable -->
-        <h3 class="text-lg font-bold hover:text-blue-300 cursor-pointer" hx-get="/" hx-target="#mainContent">
-            Welcome to Isyraf's Portfolio
-        </h3>
-
         <li>
-            <button hx-get="/" hx-target="#mainContent" class="w-full text-left text-blue-300 hover:text-blue-400">
-                🏠 Home
+            <button
+                hx-get="/"
+                hx-target="#mainContent"
+                class="group w-full flex items-center gap-2 text-left bg-gray-800 text-green-600 hover:bg-green-600 hover:text-white p-2 rounded-3xl hover:rounded-xl transition-all duration-300"
+            >
+                <i class="fas fa-house-user"></i>
+                <span
+                    class="absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md text-white bg-gray-900 text-xs font-bold transform scale-0 group-hover:scale-100 transition-transform duration-300 origin-left"
+                >
+                    Home
+                </span>
             </button>
         </li>
+        
+        <!-- Separator Line -->
+        <div class="border-t border-gray-600 my-4"></div>
 
-        <div class="flex items-center gap-4">
-            <button id="playAudio" class="bg-blue-500 text-white px-3 py-1 rounded">
-                ▶️ Play Welcome Audio
+        <div>
+            <button
+                id="playAudio"
+                class="group w-full flex items-center gap-2 text-left bg-gray-800 text-green-600 hover:bg-green-600 hover:text-white p-2 rounded-3xl hover:rounded-xl transition-all duration-300"
+            >
+                <i class="fas fa-volume-up"></i>
+                <span
+                    class="absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md text-white bg-gray-900 text-xs font-bold transform scale-0 group-hover:scale-100 transition-transform duration-300 origin-left"
+                >
+                    Play Welcome Audio
+                </span>
             </button>
             <audio id="welcomeAudio" src="static/audio/welcome.mp3"></audio>
         </div>
         <li>
-            <button hx-get="/experience" hx-target="#mainContent" class="w-full text-left">
-                Working Experience
+            <button
+                hx-get="/experience"
+                hx-target="#mainContent"
+                class="group w-full flex items-center gap-2 text-left bg-gray-800 text-green-600 hover:bg-green-600 hover:text-white p-2 rounded-3xl hover:rounded-xl transition-all duration-300"
+            >
+                <i class="fas fa-briefcase"></i>
+                <span
+                    class="absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md text-white bg-gray-900 text-xs font-bold transform scale-0 group-hover:scale-100 transition-transform duration-300 origin-left"
+                >
+                    Working Experience
+                </span>
             </button>
         </li>
         <li>
-            <button hx-get="/projects" hx-target="#mainContent" class="w-full text-left">
-                Projects
+            <button
+                hx-get="/projects"
+                hx-target="#mainContent"
+                class="group w-full flex items-center gap-2 text-left bg-gray-800 text-green-600 hover:bg-green-600 hover:text-white p-2 rounded-3xl hover:rounded-xl transition-all duration-300"
+            >
+                <i class="fas fa-project-diagram"></i>
+                <span
+                    class="absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md text-white bg-gray-900 text-xs font-bold transform scale-0 group-hover:scale-100 transition-transform duration-300 origin-left"
+                >
+                    Projects
+                </span>
             </button>
         </li>
         <li>
-            <button hx-get="/contact" hx-target="#mainContent" class="w-full text-left">
-                Contact Me
+            <button
+                hx-get="/contact"
+                hx-target="#mainContent"
+                class="group w-full flex items-center gap-2 text-left bg-gray-800 text-green-600 hover:bg-green-600 hover:text-white p-2 rounded-3xl hover:rounded-xl transition-all duration-300"
+            >
+                <i class="fas fa-envelope"></i>
+                <span
+                    class="absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md text-white bg-gray-900 text-xs font-bold transform scale-0 group-hover:scale-100 transition-transform duration-300 origin-left"
+                >
+                    Contact Me
+                </span>
             </button>
         </li>
         <li>
-            <button hx-get="/ama" hx-target="#mainContent" class="w-full text-left">
-                Ask Me Anything
+            <button
+                hx-get="/ama"
+                hx-target="#mainContent"
+                class="group w-full flex items-center gap-2 text-left bg-gray-800 text-green-600 hover:bg-green-600 hover:text-white p-2 rounded-3xl hover:rounded-xl transition-all duration-300"
+            >
+                <i class="fas fa-comments"></i>
+                <span
+                    class="absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md text-white bg-gray-900 text-xs font-bold transform scale-0 group-hover:scale-100 transition-transform duration-300 origin-left"
+                >
+                    Ask Me Anything
+                </span>
             </button>
         </li>
         <li>
-            <button hx-get="/quiz" hx-target="#mainContent" class="w-full text-left">
-                Programming Quiz
+            <button
+                hx-get="/quiz"
+                hx-target="#mainContent"
+                class="group w-full flex items-center gap-2 text-left bg-gray-800 text-green-600 hover:bg-green-600 hover:text-white p-2 rounded-3xl hover:rounded-xl transition-all duration-300"
+            >
+                <i class="fas fa-graduation-cap"></i>
+                <span
+                    class="absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md text-white bg-gray-900 text-xs font-bold transform scale-0 group-hover:scale-100 transition-transform duration-300 origin-left"
+                >
+                    Programming Quiz
+                </span>
             </button>
         </li>
     </ul>
