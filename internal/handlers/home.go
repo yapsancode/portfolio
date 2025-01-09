@@ -27,12 +27,22 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Execute the base template
+	// Check if the request is from HTMX
+	if r.Header.Get("HX-Request") == "true" {
+		// Render only the content block
+		err = tmpl.ExecuteTemplate(w, "content", nil)
+		if err != nil {
+			log.Printf("Template execution error: %v", err)
+			http.Error(w, "Unable to render template", http.StatusInternalServerError)
+		}
+		return
+	}
+
+	// Otherwise, render the full base template
 	err = tmpl.ExecuteTemplate(w, "base", nil)
 	if err != nil {
 		log.Printf("Template execution error: %v", err)
 		http.Error(w, "Unable to render template", http.StatusInternalServerError)
-		return
 	}
 }
 
