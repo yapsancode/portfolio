@@ -2,25 +2,40 @@
 package handlers
 
 import (
-	"fmt"
+	"html/template"
 	"net/http"
 )
 
 func ExperienceHandler(w http.ResponseWriter, r *http.Request) {
-	html := `
-    <section>
-        <h2 class="text-2xl font-bold mb-4">Working Experienadadce</h2>
-        <div class="space-y-4">
-            <div class="bg-white p-4 rounded shadow">
-                <h3 class="font-semibold">Software Developer at ABC Co.</h3>
-                <p>Developed scalable web applications and collaborated with cross-functiasdasonal teams.</p>
-            </div>
-            <div class="bg-white p-4 rounded shadow">
-                <h3 class="font-semibold">Intern at XYZ Inc.</h3>
-                <p>Worked on IoT projects and implemented innovative solutions for client needs.</p>
-            </div>
-        </div>
-    </section>`
+	tmpl, err := template.ParseFiles("templates/pages/experience.html")
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
 
-	fmt.Fprint(w, html)
+	// You can pass data to template if needed
+	data := struct {
+		Title       string
+		Experiences []struct {
+			Role        string
+			Description string
+		}
+	}{
+		Title: "Where I used to work 👨🏻‍💻",
+		Experiences: []struct {
+			Role        string
+			Description string
+		}{
+			{
+				Role:        "Software Developer at ABC Co.",
+				Description: "Developed scalable web applications and collaborated with cross-functional teams.",
+			},
+			{
+				Role:        "Intern at XYZ Inc.",
+				Description: "Worked on IoT projects and implemented innovative solutions for client needs.",
+			},
+		},
+	}
+
+	tmpl.Execute(w, data)
 }

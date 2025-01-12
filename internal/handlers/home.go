@@ -47,6 +47,6 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func WorkingOnHandler(w http.ResponseWriter, r *http.Request) {
-	currentWork := "Building a portfolio using Go, HTMX, Tailwind CSS, and MySQL!"
+	currentWork := "I create this portfolio using Go, HTMX, Tailwind CSS, and MySQL!"
 	w.Write([]byte(currentWork))
 }

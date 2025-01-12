@@ -1,19 +1,35 @@
 {{define "content"}}
-<div class="flex flex-col items-center justify-center h-full text-center">
-    <h1 class="text-4xl font-bold mb-6">Welcome to My Portfolio</h1>
-    <p class="text-xl mb-8">Hi, I'm Isyraf - a Software Developer</p>
-    <div class="space-y-4 max-w-2xl">
-        <p class="text-gray-600">I specialize in building web applications using modern technologies.</p>
-        <p class="text-gray-600">Please use the sidebar navigation to explore my work experience, projects, and more!</p>
-    </div>
-    
-    <!-- Optional: Add a profile image or animation here -->
-    
-    <div class="mt-8">
-        <button hx-get="/working-on" hx-target="#currentWork" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-            What I'm Working On
-        </button>
-        <div id="currentWork" class="mt-4 text-gray-600"></div>
+<div class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white animate-fade-in-left flex items-center">
+    <div class="flex flex-wrap items-center justify-center px-4 py-16 w-full lg:w-10/12 mx-auto">
+        <!-- Text Section -->
+        <div class="w-full lg:w-6/12 text-center lg:text-left space-y-6">
+            <h1 class="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                Hi, I'm Isyraf
+            </h1>
+            <p class="text-2xl font-medium">
+                I'm a <span id="animatedText" class="text-blue-400"></span>
+            </p>
+            <p class="text-lg text-gray-300">I specialize in building web applications using modern technologies.</p>
+            <p class="text-lg text-gray-400">Check out my work experience, projects, and more using the sidebar navigation!</p>
+
+            <!-- Tech Stack Button -->
+            <div class="mt-8">
+                <button
+                    hx-get="/working-on"
+                    hx-target="#currentWork"
+                    class="px-6 py-3 font-semibold text-white bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg hover:shadow-lg hover:shadow-blue-500/50 transition-transform transform hover:scale-105 duration-300">
+                    Explore My Tech Stack
+                </button>
+                <div id="currentWork" class="mt-6 text-white"></div>
+            </div>
+        </div>
+
+        <!-- Profile Picture Section -->
+        <div class="w-full lg:w-6/12 flex justify-center lg:justify-end mt-8 lg:mt-0">
+            <div class="w-64 h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-blue-500 shadow-lg">
+                <img src="static/images/msyelf.jpg" alt="Your Profile Picture" class="w-full h-full object-cover">
+            </div>
+        </div>
     </div>
 </div>
 {{end}}

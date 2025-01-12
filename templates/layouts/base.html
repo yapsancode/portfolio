@@ -17,13 +17,29 @@
         <div class="w-16">
             {{template "sidebar" .}}
         </div>
-
         <!-- Main Content -->
-        <div id="mainContent" class="flex-grow p-4">
+        <div id="mainContent" class="flex-grow">
             {{template "content" .}}
         </div>
     </div>
-    <script src="/static/js/main.js"></script>
+    <!-- Inline script to verify JavaScript is running -->
+    <script>
+        console.log('Inline script executed');
+        console.log('Looking for animatedText element:', document.getElementById('animatedText'));
+    </script>
+    
+    <!-- Main script with error catching -->
+    <script>
+        try {
+            const mainScript = document.createElement('script');
+            mainScript.src = '/static/js/main.js';
+            mainScript.onload = () => console.log('main.js loaded successfully');
+            mainScript.onerror = (e) => console.error('Error loading main.js:', e);
+            document.body.appendChild(mainScript);
+        } catch (error) {
+            console.error('Error setting up main.js:', error);
+        }
+    </script>
 </body>
 </html>
 {{end}}
