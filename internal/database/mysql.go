@@ -3,6 +3,7 @@ package database
 
 import (
 	"database/sql"
+	"encoding/json"
 	"portfolio/internal/config"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -12,18 +13,21 @@ var DB *sql.DB
 
 func Initialize() error {
 	dbConfig := config.GetDBConfig()
-
 	var err error
 	DB, err = sql.Open("mysql", dbConfig.FormatDSN())
 	if err != nil {
 		return err
 	}
-
 	if err = DB.Ping(); err != nil {
 		return err
 	}
-
-	return createTables()
+	if err = createTables(); err != nil {
+		return err
+	}
+	if err = addSampleQuizQuestions(); err != nil {
+		return err
+	}
+	return nil
 }
 
 func createTables() error {
@@ -55,6 +59,57 @@ func createTables() error {
 
 	for _, query := range queries {
 		if _, err := DB.Exec(query); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func addSampleQuizQuestions() error {
+	// Check if we already have questions
+	var count int
+	err := DB.QueryRow("SELECT COUNT(*) FROM quiz_questions").Scan(&count)
+	if err != nil {
+		return err
+	}
+
+	// If we already have questions, skip
+	if count > 0 {
+		return nil
+	}
+
+	// Sample questions
+	questions := []struct {
+		question string
+		options  []string
+		answer   int
+	}{
+		{
+			question: "What is the correct syntax for declaring a variable in Go?",
+			options:  []string{"var x = 5", "let x = 5", "x := 5", "All of the above"},
+			answer:   2, // Index of "x := 5"
+		},
+		{
+			question: "Which of these is NOT a valid Go data type?",
+			options:  []string{"int", "float", "string", "boolean"},
+			answer:   1, // Index of "float" (Go uses float32/float64)
+		},
+	}
+
+	// Insert questions
+	for _, q := range questions {
+		optionsJSON, err := json.Marshal(q.options)
+		if err != nil {
+			return err
+		}
+
+		_, err = DB.Exec(`
+            INSERT INTO quiz_questions (question, options, answer)
+            VALUES (?, ?, ?)
+        `, q.question, optionsJSON, q.answer)
+
+		if err != nil {
 			return err
 		}
 	}

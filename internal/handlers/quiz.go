@@ -2,7 +2,10 @@
 package handlers
 
 import (
+	"database/sql"
+	"encoding/json"
 	"fmt"
+	"html/template"
 	"net/http"
 	"portfolio/internal/database"
 	"portfolio/internal/models"
@@ -10,15 +13,28 @@ import (
 
 func QuizQuestionHandler(w http.ResponseWriter, r *http.Request) {
 	var question models.QuizQuestion
+	var optionsJSON []byte // Temporary variable to hold JSON data
+
 	err := database.DB.QueryRow(`
-        SELECT id, question, options, answer 
-        FROM quiz_questions 
-        ORDER BY RAND() 
+        SELECT id, question, options, answer
+        FROM quiz_questions
+        ORDER BY RAND()
         LIMIT 1
-    `).Scan(&question.ID, &question.Question, &question.Options, &question.Answer)
+    `).Scan(&question.ID, &question.Question, &optionsJSON, &question.Answer)
 
 	if err != nil {
-		http.Error(w, "Unable to fetch questions", http.StatusInternalServerError)
+		if err == sql.ErrNoRows {
+			http.Error(w, "No questions available", http.StatusNotFound)
+		} else {
+			http.Error(w, "Unable to fetch questions: "+err.Error(), http.StatusInternalServerError)
+		}
+		return
+	}
+
+	// Parse the JSON options into the string slice
+	err = json.Unmarshal(optionsJSON, &question.Options)
+	if err != nil {
+		http.Error(w, "Invalid options format: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
 
@@ -34,7 +50,7 @@ func QuizQuestionHandler(w http.ResponseWriter, r *http.Request) {
 	var optionsHTML string
 	for i, opt := range question.Options {
 		optionsHTML += fmt.Sprintf(`
-            <button 
+            <button
                 class="w-full text-left p-3 rounded border hover:bg-gray-50"
                 hx-post="/quiz/answer"
                 hx-vals='{"questionId": %d, "answer": %d}'
@@ -75,30 +91,14 @@ func QuizAnswerHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func QuizSectionHandler(w http.ResponseWriter, r *http.Request) {
-	html := `
-    <section class="mt-8">
-        <h2 class="text-2xl font-bold mb-4">Programming Quiz</h2>
-        <div id="quizContent" class="bg-white p-6 rounded-lg shadow-md">
-            <div class="mb-4">
-                <span class="text-gray-600">Current Score: </span>
-                <span id="currentScore" class="font-bold">0</span>
-            </div>
-            
-            <div id="questionContainer" class="mb-6">
-                <button 
-                    hx-get="/quiz/question" 
-                    hx-target="#questionContainer"
-                    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-                    Start Quiz
-                </button>
-            </div>
+	tmpl, err := template.ParseFiles("templates/pages/quiz.html")
+	if err != nil {
+		http.Error(w, "Unable to load template", http.StatusInternalServerError)
+		return
+	}
 
-            <div id="quizStats" class="text-sm text-gray-600">
-                <p>Questions Attempted: <span id="questionsAttempted">0</span></p>
-                <p>Correct Answers: <span id="correctAnswers">0</span></p>
-            </div>
-        </div>
-    </section>`
-
-	fmt.Fprint(w, html)
+	err = tmpl.Execute(w, nil)
+	if err != nil {
+		http.Error(w, "Unable to render template", http.StatusInternalServerError)
+	}
 }

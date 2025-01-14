@@ -11,6 +11,8 @@ document.getElementById('playAudio')?.addEventListener('click', () => {
 // Text Animation
 const roles = [
     "Software Developer",
+    'UI/UX Enthusiast',
+    'Problem Solver',
     "Software Engineer",
     "Full-Stack Developer",
     "Mobile App Developer",

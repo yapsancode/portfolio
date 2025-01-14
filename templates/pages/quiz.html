@@ -1,0 +1,24 @@
+<!-- templates/pages/quiz.html -->
+<section class="mt-8">
+    <h2 class="text-2xl font-bold mb-4">Programming Quiz</h2>
+    <div id="quizContent" class="bg-white p-6 rounded-lg shadow-md">
+        <div class="mb-4">
+            <span class="text-gray-600">Current Score: </span>
+            <span id="currentScore" class="font-bold">0</span>
+        </div>
+        
+        <div id="questionContainer" class="mb-6">
+            <button 
+                hx-get="/quiz/question" 
+                hx-target="#questionContainer"
+                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+                Start Quiz
+            </button>
+        </div>
+
+        <div id="quizStats" class="text-sm text-gray-600">
+            <p>Questions Attempted: <span id="questionsAttempted">0</span></p>
+            <p>Correct Answers: <span id="correctAnswers">0</span></p>
+        </div>
+    </div>
+</section>

@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+    font-family: 'Aesthetic';
+    src: url('/static/fonts/Aesthetic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.font-aesthetic {
+    font-family: 'Aesthetic', sans-serif;
+}
