@@ -21,7 +21,7 @@ func ExperienceHandler(w http.ResponseWriter, r *http.Request) {
 			Description string
 		}
 	}{
-		Title: "Where I used to work 👨🏻‍💻",
+		Title: "Where I used to ",
 		Experiences: []struct {
 			Role        string
 			Description string

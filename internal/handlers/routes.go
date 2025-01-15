@@ -14,6 +14,7 @@ func RegisterRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/contact", ContactSectionHandler)
 	mux.HandleFunc("/ama", AMASectionHandler)
 	mux.HandleFunc("/quiz", QuizSectionHandler)
+	mux.HandleFunc("/about", AboutHandler)
 
 	// Form submission handlers
 	mux.HandleFunc("/submit-contact", ContactHandler) // For contact form POST

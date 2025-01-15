@@ -92,3 +92,12 @@ document.body.addEventListener('htmx:afterRequest', function(evt) {
         console.error('Error handling quiz score update:', error);
     }
 });
+
+const sidebar = document.getElementById('sidebar');
+const toggleSidebar = document.getElementById('toggleSidebar');
+
+toggleSidebar.addEventListener('click', () => {
+    console.log('Sidebar toggle clicked');
+    sidebar.classList.toggle('w-16');
+    sidebar.classList.toggle('w-64');
+});
