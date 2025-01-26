@@ -12,3 +12,9 @@ type QuizResponse struct {
 	Options    []string `json:"options"`
 	QuestionID int      `json:"questionId"`
 }
+
+type QuizUser struct {
+	ID         int    `json:"id"`
+	Name       string `json:"name"`
+	TotalScore int    `json:"total_score"`
+}

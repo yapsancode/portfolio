@@ -1,24 +1,53 @@
 <!-- templates/pages/quiz.html -->
-<section class="mt-8">
+{{define "content"}}
+<section class="mt-8 px-8">
     <h2 class="text-2xl font-bold mb-4">Programming Quiz</h2>
+
+    {{template "quiz_dialog" .}}
+
     <div id="quizContent" class="bg-white p-6 rounded-lg shadow-md">
-        <div class="mb-4">
-            <span class="text-gray-600">Current Score: </span>
-            <span id="currentScore" class="font-bold">0</span>
-        </div>
-        
         <div id="questionContainer" class="mb-6">
-            <button 
-                hx-get="/quiz/question" 
-                hx-target="#questionContainer"
-                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-                Start Quiz
-            </button>
+            <!-- Ensure this container is always present -->
+            {{if .Question}}
+                <div class="space-y-4">
+                    <p class="text-lg font-semibold mb-4">{{.Question.Question}}</p>
+                    <div class="space-y-2">
+                        {{range $index, $option := .Question.Options}}
+                            <button
+                                class="w-full text-left p-3 rounded border hover:bg-gray-50 transition-colors"
+                                hx-post="/quiz/answer"
+                                hx-trigger="click"
+                                hx-vals='{"questionId": "{{.ID}}", "answer": "{{$index}}"}'
+                                hx-target="#questionContainer"
+                                hx-swap="innerHTML"
+                            >{{$option}}</button>
+                        {{end}}
+                    </div>
+                </div>
+            {{else}}
+                <button hx-get="/quiz/check-user" hx-target="#questionContainer" hx-swap="innerHTML"
+                    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+                    Start Quiz
+                </button>
+            {{end}}
         </div>
 
-        <div id="quizStats" class="text-sm text-gray-600">
-            <p>Questions Attempted: <span id="questionsAttempted">0</span></p>
-            <p>Correct Answers: <span id="correctAnswers">0</span></p>
+        <div id="quizStats" class="flex justify-between bg-gray-50 p-3 rounded-lg shadow">
+            <div>
+                <p>Attempted: <span id="questionsAttempted">0</span></p>
+                <p>Correct: <span id="correctAnswers">0</span></p>
+            </div>
+            <div>
+                <p>Score: <span id="currentScore" class="text-lg font-bold text-blue-600">0</span></p>
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <h3 class="text-lg font-semibold mb-3">Top Players</h3>
+            <div id="leaderboard" class="space-y-2" hx-get="/quiz/leaderboard"
+                hx-trigger="load, refreshLeaderboard from:body" hx-swap="innerHTML">
+            </div>
         </div>
     </div>
 </section>
+{{end}}
