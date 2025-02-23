@@ -1,10 +1,60 @@
-<section>
-    <h2 class="text-2xl font-bold mb-4">Ask Me Anything</h2>
-    <form method="POST" action="/ama-submit" class="space-y-4 bg-white p-4 rounded shadow">
-        <div>
-            <label for="question" class="block font-semibold">Your Anonymous Question:</label>
-            <textarea id="question" name="question" required class="w-full p-2 border rounded h-32"></textarea>
+<section class="relative overflow-hidden">
+    <div class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-gray-100">
+        <div class="container mx-auto px-4 py-16 lg:py-24 max-w-6xl">
+            <!-- Enhanced Header Section -->
+            <div class="mb-16 text-center lg:text-left animate-fade-in-up duration-700">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500">
+                    Ask Me Anything
+                </h2>
+                <p class="text-xl text-gray-300 max-w-2xl lg:mx-0 mx-auto">
+                    Your question will be 100% anonymous. 
+                    <span class="text-yellow-400">No tracking, no cookies</span> - 
+                    just pure curiosity.
+                </p>
+            </div>
+
+            <!-- Enhanced Form Section -->
+            <form method="POST" action="/ama-submit" 
+                  class="max-w-2xl mx-auto space-y-6 backdrop-blur-lg bg-white/10 p-8 rounded-xl 
+                         border border-gray-200/20 shadow-2xl transform hover:shadow-yellow-500/10 
+                         transition-all duration-300">
+                <div class="space-y-3">
+                    <label for="question" class="block text-gray-300 font-medium text-lg">
+                        Your Anonymous Question
+                        <span class="text-yellow-400 ml-1">*</span>
+                    </label>
+                    <textarea 
+                        id="question" 
+                        name="question" 
+                        required 
+                        placeholder="Ask anything that's on your mind... Nobody will know it's you!" 
+                        class="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg 
+                               text-gray-100 h-40 resize-y placeholder-gray-500
+                               transition-all duration-300 focus:outline-none focus:ring-2 
+                               focus:ring-yellow-400 hover:border-yellow-400"
+                    ></textarea>
+                    <p class="text-gray-400 text-sm italic">
+                        Your privacy is protected. Feel free to ask anything.
+                    </p>
+                </div>
+
+                <div class="flex items-center justify-between pt-4">
+                    <p class="text-sm text-gray-400">
+                        <span class="inline-block align-middle mr-2">🔒</span>
+                        100% Anonymous
+                    </p>
+                    <button 
+                        type="submit" 
+                        class="px-6 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 
+                               text-white rounded-lg font-medium hover:scale-105 
+                               transition-transform duration-300 focus:outline-none 
+                               focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 
+                               shadow-lg shadow-yellow-500/20"
+                    >
+                        Send Anonymously
+                    </button>
+                </div>
+            </form>
         </div>
-        <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Submit Anonymously</button>
-    </form>
+    </div>
 </section>
