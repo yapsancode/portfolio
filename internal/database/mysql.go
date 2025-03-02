@@ -61,6 +61,15 @@ func createTables() error {
             total_score INT DEFAULT 0,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )`,
+		`CREATE TABLE IF NOT EXISTS experiences (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            role VARCHAR(255) NOT NULL,
+            company VARCHAR(255) NOT NULL,
+            duration VARCHAR(50) NOT NULL,
+            description TEXT NOT NULL,
+            skills JSON NOT NULL,
+            achievements JSON NOT NULL
+        )`,
 	}
 
 	for _, query := range queries {

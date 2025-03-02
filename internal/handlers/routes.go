@@ -11,6 +11,7 @@ func RegisterRoutes(mux *http.ServeMux) {
 	// Main section handlers (for HTMX requests)
 	mux.HandleFunc("/experience", ExperienceHandler)
 	mux.HandleFunc("/projects", ProjectsHandler)
+	mux.HandleFunc("/api/project/", ProjectDetailsHandler)
 	mux.HandleFunc("/contact", ContactSectionHandler)
 	mux.HandleFunc("/ama", AMASectionHandler)
 	mux.HandleFunc("/about", AboutHandler)

@@ -1,0 +1,55 @@
+<div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-2xl">
+    <h2 class="text-3xl font-bold text-white mb-4">{{.Title}}</h2>
+    
+    {{if .ImageURL}}
+    <div class="aspect-video overflow-hidden rounded-lg mb-6">
+        <img src="{{.ImageURL}}" alt="{{.Title}}" class="w-full h-full object-cover">
+    </div>
+    {{end}}
+    
+    <div class="mb-6">
+        <h3 class="text-xl font-semibold text-blue-300 mb-2">About this project</h3>
+        <p class="text-gray-300">{{.Description}}</p>
+    </div>
+    
+    {{if .Technologies}}
+    <div class="mb-6">
+        <h3 class="text-xl font-semibold text-blue-300 mb-2">Technologies Used</h3>
+        <div class="flex flex-wrap gap-2">
+            {{range .Technologies}}
+            <span class="px-3 py-1 bg-white/10 rounded-full text-sm text-blue-300">{{.}}</span>
+            {{end}}
+        </div>
+    </div>
+    {{end}}
+    
+    {{if .Highlights}}
+    <div class="mb-6">
+        <h3 class="text-xl font-semibold text-purple-300 mb-2">Key Features</h3>
+        <ul class="space-y-2">
+            {{range .Highlights}}
+            <li class="flex items-start gap-2 text-gray-300">
+                <svg class="w-4 h-4 mt-1 text-purple-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>{{.}}</span>
+            </li>
+            {{end}}
+        </ul>
+    </div>
+    {{end}}
+    
+    <div class="flex space-x-3 mt-6">
+        {{if .LiveURL}}
+        <a href="{{.LiveURL}}" target="_blank" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md text-white font-medium transition-colors duration-300">
+            Live Demo
+        </a>
+        {{end}}
+        
+        {{if .GithubURL}}
+        <a href="{{.GithubURL}}" target="_blank" class="px-4 py-2 border border-white/20 hover:bg-white/10 rounded-md text-white font-medium transition-colors duration-300">
+            View Code
+        </a>
+        {{end}}
+    </div>
+</div>

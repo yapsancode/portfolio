@@ -4,23 +4,14 @@ package handlers
 import (
 	"html/template"
 	"net/http"
+	"portfolio/internal/models"
 	"strconv"
 	"strings"
 )
 
-type Experience struct {
-	ID           int
-	Role         string
-	Company      string
-	Duration     string
-	Description  string
-	Skills       []string
-	Achievements []string
-}
-
 type PageData struct {
 	Title       string
-	Experiences []Experience
+	Experiences []models.Experience
 }
 
 func ExperienceHandler(w http.ResponseWriter, r *http.Request) {
@@ -30,29 +21,22 @@ func ExperienceHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Fetch experiences from database
+	experiences, err := models.GetAllExperiences()
+	if err != nil {
+		http.Error(w, "Database Error: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 	data := PageData{
-		Title: "Where I Used to Work",
-		Experiences: []Experience{
-			{
-				ID:          1,
-				Role:        "Software Developer",
-				Company:     "ABC Co.",
-				Duration:    "2020-2023",
-				Description: "Developed scalable web applications and collaborated with cross-functional teams.",
-				Skills:      []string{"Go", "HTMX", "Tailwind"},
-				Achievements: []string{
-					"Improved application performance by 40%",
-					"Led team of 5 developers",
-				},
-			},
-			// Add more experiences here
-		},
+		Title:       "Where I Used to Work",
+		Experiences: experiences,
 	}
 
 	tmpl.Execute(w, data)
 }
 
-// New handler for experience details
+// Handler for experience details
 func ExperienceDetailsHandler(w http.ResponseWriter, r *http.Request) {
 	// Parse experience ID from URL
 	idStr := strings.TrimPrefix(r.URL.Path, "/api/experience/")
@@ -62,18 +46,11 @@ func ExperienceDetailsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// In a real app, you'd fetch this from a database
-	experience := Experience{
-		ID:          id,
-		Role:        "Software Developer",
-		Company:     "ABC Co.",
-		Duration:    "2020-2023",
-		Description: "Developed scalable web applications and collaborated with cross-functional teams.",
-		Skills:      []string{"Go", "HTMX", "Tailwind"},
-		Achievements: []string{
-			"Improved application performance by 40%",
-			"Led team of 5 developers",
-		},
+	// Fetch from database
+	experience, err := models.GetExperienceByID(id)
+	if err != nil {
+		http.Error(w, "Experience not found", http.StatusNotFound)
+		return
 	}
 
 	tmpl, err := template.ParseFiles("templates/partials/experience-details.html")
