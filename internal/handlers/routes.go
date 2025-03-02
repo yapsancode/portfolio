@@ -23,12 +23,4 @@ func RegisterRoutes(mux *http.ServeMux) {
 	// Other functionality
 	mux.HandleFunc("/random-advice", RandomAdviceHandler)
 	mux.HandleFunc("/working-on", WorkingOnHandler)
-
-	// Quiz routes
-	mux.HandleFunc("/quiz", QuizSectionHandler)
-	mux.HandleFunc("/quiz/question", QuizQuestionHandler)
-	mux.HandleFunc("/quiz/answer", QuizAnswerHandler)
-	mux.HandleFunc("/quiz/check-user", CheckUserHandler)
-	mux.HandleFunc("/quiz/register", RegisterUserHandler)
-	mux.HandleFunc("/quiz/leaderboard", GetLeaderboardHandler)
 }
