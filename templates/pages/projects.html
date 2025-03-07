@@ -1,18 +1,22 @@
+<!-- portfolio/templates/pages/projects.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Include your head content here -->
     <title>{{.Title}} - Your Portfolio</title>
 </head>
+
 <body>
     <!-- Include your header/navigation if applicable -->
-    
+
     <section class="relative overflow-hidden">
         <div class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-gray-100">
             <div class="container mx-auto px-4 py-16 lg:py-24 max-w-6xl">
                 <!-- Header Section -->
                 <div class="mb-16 text-center lg:text-left animate-fade-in">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-300">
+                    <h2
+                        class="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-300 leading-loose pb-2">
                         {{.Title}}
                     </h2>
                     <p class="text-xl text-gray-300">Showcasing my work and side projects</p>
@@ -21,20 +25,19 @@
                 <!-- Projects Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {{range .Projects}}
-                    <div 
-                        class="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden shadow-2xl hover:border-white/20 transition-all duration-300 ease-out hover:shadow-near hover:translate-y-[-4px] animate-fade-in-up"
-                        data-aos="fade-up"
-                    >
+                    <div class="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden shadow-2xl hover:border-white/20 transition-all duration-300 ease-out hover:shadow-near hover:translate-y-[-4px] animate-fade-in-up"
+                        data-aos="fade-up">
                         {{if .ImageURL}}
                         <div class="aspect-video overflow-hidden">
-                            <img src="{{.ImageURL}}" alt="{{.Title}}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                            <img src="{{.ImageURL}}" alt="{{.Title}}"
+                                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
                         </div>
                         {{end}}
-                        
+
                         <div class="p-6">
                             <h3 class="text-2xl font-bold text-white mb-2">{{.Title}}</h3>
                             <p class="text-gray-300 mb-4">{{.Description}}</p>
-                            
+
                             {{if .Technologies}}
                             <div class="mb-4">
                                 <h4 class="text-sm font-semibold text-blue-300 mb-2">TECHNOLOGIES</h4>
@@ -45,21 +48,24 @@
                                 </div>
                             </div>
                             {{end}}
-                            
+
                             <div class="flex space-x-3 mt-6">
                                 {{if .LiveURL}}
-                                <a href="{{.LiveURL}}" target="_blank" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md text-white font-medium transition-colors duration-300">
+                                <a href="{{.LiveURL}}" target="_blank"
+                                    class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md text-white font-medium transition-colors duration-300">
                                     Live Demo
                                 </a>
                                 {{end}}
-                                
+
                                 {{if .GithubURL}}
-                                <a href="{{.GithubURL}}" target="_blank" class="px-4 py-2 border border-white/20 hover:bg-white/10 rounded-md text-white font-medium transition-colors duration-300">
+                                <a href="{{.GithubURL}}" target="_blank"
+                                    class="px-4 py-2 border border-white/20 hover:bg-white/10 rounded-md text-white font-medium transition-colors duration-300">
                                     View Code
                                 </a>
                                 {{end}}
-                                
-                                <a href="/project/{{.ID}}" class="px-4 py-2 border border-white/20 hover:bg-white/10 rounded-md text-white font-medium transition-colors duration-300">
+
+                                <a href="/project/{{.ID}}"
+                                    class="px-4 py-2 border border-white/20 hover:bg-white/10 rounded-md text-white font-medium transition-colors duration-300">
                                     Details
                                 </a>
                             </div>
@@ -70,7 +76,8 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Include your footer if applicable -->
 </body>
+
 </html>

@@ -1,7 +1,7 @@
-<!-- templates/layouts/base.html -->
 {{define "base"}}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,23 +13,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans">
-    <div class="flex min-h-screen">
+
+<body class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-gray-100 font-sans">
+    <div class="flex h-screen w-screen">
         <!-- Sidebar -->
-        <div class="w-16">
+        <div class="w-16 bg-slate-800">
             {{template "sidebar" .}}
         </div>
         <!-- Main Content -->
-        <div id="mainContent" class="flex-grow">
+        <div id="mainContent" class="flex-1 overflow-auto">
             {{template "content" .}}
         </div>
     </div>
     <!-- Inline script to verify JavaScript is running -->
-    <script>
+    <!-- <script>
         console.log('Inline script executed');
         console.log('Looking for animatedText element:', document.getElementById('animatedText'));
-    </script>
-    
+    </script> -->
+
     <!-- Main script with error catching -->
     <script>
         try {
@@ -43,5 +44,6 @@
         }
     </script>
 </body>
+
 </html>
 {{end}}
