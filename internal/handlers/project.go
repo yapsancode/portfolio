@@ -38,7 +38,6 @@ func ProjectsHandler(w http.ResponseWriter, r *http.Request) {
 
 // Handler for project details
 func ProjectDetailsHandler(w http.ResponseWriter, r *http.Request) {
-	// Parse project ID from URL
 	idStr := strings.TrimPrefix(r.URL.Path, "/api/project/")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
@@ -46,14 +45,13 @@ func ProjectDetailsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Fetch from database
 	project, err := models.GetProjectByID(id)
 	if err != nil {
 		http.Error(w, "Project not found", http.StatusNotFound)
 		return
 	}
 
-	tmpl, err := template.ParseFiles("templates/partials/project-details.html")
+	tmpl, err := template.ParseFiles("templates/pages/project_detail.html")
 	if err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
